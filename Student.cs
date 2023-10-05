@@ -16,8 +16,8 @@ namespace Classes_Programming_Assignment
 
         public Student (string firstName, string lastName)
         {
-            this._firstName = firstName;
-            this._lastName = lastName;
+            this._firstName = firstName.Trim();
+            this._lastName = lastName.Trim();
             _studentNum = Generator.Next(1000) + 555000;
             GenerateEmail();
         }
@@ -71,7 +71,22 @@ namespace Classes_Programming_Assignment
 
         private void GenerateEmail()
         {
-            _email = _firstName.Substring(0,3) + _lastName.Substring(0,3) + _studentNum.ToString().Substring(_studentNum.ToString().Length-3) + "@ICS4U.com";
+            if (_firstName.Length >= 3 && _lastName.Length >= 3)
+            {
+                _email = _firstName.Substring(0, 3) + _lastName.Substring(0, 3) + _studentNum.ToString().Substring(_studentNum.ToString().Length - 3) + "@ICS4U.com";
+            }
+            else if (_firstName.Length >= 3)
+            {
+                _email = _firstName.Substring(0, 3) + _lastName + _studentNum.ToString().Substring(_studentNum.ToString().Length - 3) + "@ICS4U.com";
+            }
+            else if (_lastName.Length >= 3)
+            {
+                _email = _firstName + _lastName.Substring(0, 3) + _studentNum.ToString().Substring(_studentNum.ToString().Length - 3) + "@ICS4U.com";
+            }
+            else
+            {
+                _email = _firstName + _lastName + _studentNum.ToString().Substring(_studentNum.ToString().Length - 3) + "@ICS4U.com";
+            }
         }
 
         public string Email
@@ -80,6 +95,26 @@ namespace Classes_Programming_Assignment
             {
                 return _email;
             }
+        }
+
+        public int CompareTo(Student that)
+        {
+            if (this.LastName.CompareTo(that.LastName) == 0) 
+                return this.FirstName.CompareTo(that.FirstName);
+            return this.LastName.CompareTo(that.LastName);  
+        }
+
+        public override bool Equals(object obj)
+        {
+            Student student = obj as Student;
+            if (student == null)
+                return false;
+            return this.FirstName == student.FirstName && this.LastName == student.LastName && this.StudentNumber == student.StudentNumber;
+        }
+        
+        public override int GetHashCode()
+        {
+            return (_firstName + _lastName + _studentNum).GetHashCode();
         }
     }
 }

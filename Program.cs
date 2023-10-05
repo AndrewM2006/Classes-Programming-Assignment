@@ -11,30 +11,70 @@ namespace Classes_Programming_Assignment
     {
         static void Main(string[] args)
         {
-            List <string> Class = new List<string>();
-            Student kid = new Student("George", "Washington");
-            Class.Add(kid.FirstName + " " + kid.LastName);
-            kid.FirstName = "John"; kid.LastName = "Doe";
-            Class.Add(kid.FirstName + " " + kid.LastName);
-            kid.FirstName = "Jack"; kid.LastName = "Eitel";
-            Class.Add(kid.FirstName + " " + kid.LastName);
-            foreach (string s in Class)
+            List<Student> students = new List<Student>();
+            students.Add(new Student("Andrew", "Monteith"));
+            students.Add(new Student("George", "Washington"));
+            students.Add(new Student("Luke", "Skywalker"));
+            while (true)
             {
-                Console.WriteLine(s);
+                string menuOption;
+                Console.WriteLine("Press 1 to Display Students");
+                Console.WriteLine("Press 2 to View Student Details");
+                Console.WriteLine("Press 3 to Add a Student");
+                Console.WriteLine("Press 4 to Remove a Student");
+                Console.WriteLine("Press 5 to Search for a Student");
+                Console.WriteLine("Press 6 to Edit a Student");
+                Console.WriteLine("Press 7 to Sort Students");
+                Console.WriteLine("Press Q for Quit");
+                menuOption = Console.ReadLine();
+                if (menuOption == "1")
+                {
+                    Console.WriteLine("Students in this class... ");
+                    foreach (Student student in students)
+                    {
+                        Console.WriteLine(student);
+                    }
+                }
+                else if (menuOption == "2")
+                {
+                    Console.WriteLine("Whose Details do you Want?");
+
+                }
+                else if (menuOption == "3")
+                {
+                    Console.WriteLine("Enter a first name and then a last name");
+                    students.Add(new Student (Console.ReadLine(), Console.ReadLine()));
+                    Console.WriteLine($"{students[students.Count - 1]} has been added to the class");
+                }
+                else if (menuOption == "4")
+                {
+                    
+                }
+                else if (menuOption == "5")
+                {
+                    
+                }
+                else if (menuOption == "6")
+                {
+                    
+                }
+                else if (menuOption == "7")
+                {
+                    students.Sort();
+                    foreach (Student student in students)
+                    {
+                        Console.WriteLine(student);
+                    }
+                }
+                else if (menuOption == "Q" || menuOption == "q")
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input");
+                }
             }
-            Class.Clear();
-            for (int i  = 0; i < 2; i++)
-            {
-                Console.WriteLine("Enter a first name and then a last name...");
-                kid.FirstName=Console.ReadLine();
-                kid.LastName=Console.ReadLine();
-                Class.Add(kid.FirstName + " " + kid.LastName);
-            }
-            foreach (string s in Class)
-            {
-                Console.WriteLine(s);
-            }
-            Console.ReadLine();
         }
     }
 }
