@@ -11,6 +11,8 @@ namespace Classes_Programming_Assignment
     {
         static void Main(string[] args)
         {
+            int select=0;
+            bool valid;
             List<Student> students = new List<Student>();
             students.Add(new Student("Andrew", "Monteith"));
             students.Add(new Student("George", "Washington"));
@@ -37,8 +39,26 @@ namespace Classes_Programming_Assignment
                 }
                 else if (menuOption == "2")
                 {
-                    Console.WriteLine("Whose Details do you Want?");
-
+                    for (int i=0; i<students.Count; i++)
+                    {
+                        Console.WriteLine($"{i+1}. {students[i]}");
+                    }
+                    Console.WriteLine("Enter the corresponding number to view details");
+                    valid = false;
+                    while (!valid)
+                    {
+                        if (int.TryParse(Console.ReadLine(), out select) && select <= students.Count() && select>0)
+                        {
+                            valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Selection");
+                        }
+                    }
+                    Console.WriteLine($"Name: {students[select - 1].FirstName} {students[select - 1].LastName}");
+                    Console.WriteLine($"Number: {students[select - 1].StudentNumber}");
+                    Console.WriteLine($"Email: {students[select - 1].Email}");
                 }
                 else if (menuOption == "3")
                 {
