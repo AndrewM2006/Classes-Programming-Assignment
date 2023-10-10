@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Classes_Programming_Assignment
 {
-    internal class Student
+    class Student: IComparable<Student>
     {
         private static Random Generator = new Random();
         private string _firstName;

@@ -50,15 +50,15 @@ namespace Classes_Programming_Assignment
                         if (int.TryParse(Console.ReadLine(), out select) && select <= students.Count() && select>0)
                         {
                             valid = true;
+                            Console.WriteLine($"Name: {students[select - 1].FirstName} {students[select - 1].LastName}");
+                            Console.WriteLine($"Number: {students[select - 1].StudentNumber}");
+                            Console.WriteLine($"Email: {students[select - 1].Email}");
                         }
                         else
                         {
                             Console.WriteLine("Invalid Selection");
                         }
                     }
-                    Console.WriteLine($"Name: {students[select - 1].FirstName} {students[select - 1].LastName}");
-                    Console.WriteLine($"Number: {students[select - 1].StudentNumber}");
-                    Console.WriteLine($"Email: {students[select - 1].Email}");
                 }
                 else if (menuOption == "3")
                 {
@@ -68,7 +68,31 @@ namespace Classes_Programming_Assignment
                 }
                 else if (menuOption == "4")
                 {
-                    
+                    Console.WriteLine("Enter a student number to remove student");
+                    valid = false;
+                    while (!valid)
+                    {
+                        if (int.TryParse(Console.ReadLine(), out select))
+                        {
+                            valid = true;
+                            for (int i=0; i < students.Count; i++)
+                            {
+                                if (select == students[i].StudentNumber)
+                                {
+                                    students.Remove(students[i]);
+                                }
+                            }
+                            foreach (Student student in students)
+                            {
+                                Console.WriteLine(student);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Selection");
+                        }
+                    }
+
                 }
                 else if (menuOption == "5")
                 {
