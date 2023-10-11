@@ -13,6 +13,7 @@ namespace Classes_Programming_Assignment
         {
             int select=0;
             bool valid;
+            string newName;
             List<Student> students = new List<Student>();
             students.Add(new Student("Andrew", "Monteith"));
             students.Add(new Student("George", "Washington"));
@@ -68,11 +69,15 @@ namespace Classes_Programming_Assignment
                 }
                 else if (menuOption == "4")
                 {
+                    for (int i=0; i<students.Count; i++)
+                    {
+                        Console.WriteLine(students[i].FirstName + " " + students[i].LastName + " " + students[i].StudentNumber);
+                    }
                     Console.WriteLine("Enter a student number to remove student");
                     valid = false;
                     while (!valid)
                     {
-                        if (int.TryParse(Console.ReadLine(), out select))
+                        if (int.TryParse(Console.ReadLine(), out select) && students.Exists(x => x.StudentNumber == select))
                         {
                             valid = true;
                             for (int i=0; i < students.Count; i++)
@@ -92,7 +97,6 @@ namespace Classes_Programming_Assignment
                             Console.WriteLine("Invalid Selection");
                         }
                     }
-
                 }
                 else if (menuOption == "5")
                 {
@@ -100,7 +104,47 @@ namespace Classes_Programming_Assignment
                 }
                 else if (menuOption == "6")
                 {
-                    
+                    for (int i = 0; i < students.Count; i++)
+                    {
+                        Console.WriteLine(students[i].FirstName + " " + students[i].LastName + " " + students[i].StudentNumber);
+                    }
+                    Console.WriteLine("Enter a student number to edit student");
+                    valid = false;
+                    while (!valid)
+                    {
+                        if (int.TryParse(Console.ReadLine(), out select) && students.Exists(x => x.StudentNumber == select))
+                        {
+                            valid = true;
+                            for (int i = 0; i < students.Count; i++)
+                            {
+                                if (select == students[i].StudentNumber)
+                                {
+                                    Console.WriteLine("Enter a new First name then last name");
+                                    Console.WriteLine("Leave blank to avoid editing");
+                                    Console.Write("First Name: ");
+                                    newName = Console.ReadLine();
+                                    if (newName != "")
+                                    {
+                                        students[i].FirstName = newName.Trim();
+                                    }
+                                    Console.Write("Last Name: ");
+                                    newName = Console.ReadLine();
+                                    if (newName != "")
+                                    {
+                                        students[i].LastName = newName.Trim();
+                                    }
+                                }
+                            }
+                            foreach (Student student in students)
+                            {
+                                Console.WriteLine(student);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Selection");
+                        }
+                    }
                 }
                 else if (menuOption == "7")
                 {
