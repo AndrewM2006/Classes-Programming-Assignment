@@ -13,14 +13,13 @@ namespace Classes_Programming_Assignment
         {
             int select=0;
             bool valid;
-            string newName;
+            string menuOption, newName, search, whatSearch;
             List<Student> students = new List<Student>();
             students.Add(new Student("Andrew", "Monteith"));
             students.Add(new Student("George", "Washington"));
             students.Add(new Student("Luke", "Skywalker"));
             while (true)
             {
-                string menuOption;
                 Console.WriteLine("Press 1 to Display Students");
                 Console.WriteLine("Press 2 to View Student Details");
                 Console.WriteLine("Press 3 to Add a Student");
@@ -64,7 +63,9 @@ namespace Classes_Programming_Assignment
                 else if (menuOption == "3")
                 {
                     Console.WriteLine("Enter a first name and then a last name");
-                    students.Add(new Student (Console.ReadLine(), Console.ReadLine()));
+                    students.Add(new Student (Console.ReadLine().Trim(), Console.ReadLine().Trim()));
+                    students[students.Count - 1].FirstName= char.ToUpper(students[students.Count - 1].FirstName[0]) + students[students.Count - 1].FirstName.Substring(1).ToLower();
+                    students[students.Count - 1].LastName = char.ToUpper(students[students.Count - 1].LastName[0]) + students[students.Count - 1].LastName.Substring(1).ToLower();
                     Console.WriteLine($"{students[students.Count - 1]} has been added to the class");
                 }
                 else if (menuOption == "4")
@@ -100,7 +101,56 @@ namespace Classes_Programming_Assignment
                 }
                 else if (menuOption == "5")
                 {
-                    
+                    Console.WriteLine("Are you searching for a first (f) or last (l) name?");
+                    valid = false;
+                    while (!valid)
+                    {
+                        whatSearch = Console.ReadLine().ToLower().Trim();
+                        if (whatSearch == "f")
+                        {
+                            valid = true;
+                            Console.Write("Enter a First Name: ");
+                            search = Console.ReadLine().Trim();
+                            if (students.Exists(x => x.FirstName == search))
+                            {
+                                for (int i=0; i < students.Count; i++)
+                                {
+                                    if (students[i].FirstName == search)
+                                    {
+                                        Console.WriteLine(students[i]);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine(search + " was not found");
+                            }
+                        }
+                        else if (whatSearch == "l")
+                        {
+                            valid = true;
+                            Console.Write("Enter a Last Name: ");
+                            search = Console.ReadLine().Trim();
+                            if (students.Exists(x => x.LastName == search))
+                            {
+                                for (int i = 0; i < students.Count; i++)
+                                {
+                                    if (students[i].LastName == search)
+                                    {
+                                        Console.WriteLine(students[i]);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine(search + " was not found");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input, enter f for first name or l for last name");
+                        }
+                    }
                 }
                 else if (menuOption == "6")
                 {
@@ -122,13 +172,15 @@ namespace Classes_Programming_Assignment
                                     Console.WriteLine("Enter a new First name then last name");
                                     Console.WriteLine("Leave blank to avoid editing");
                                     Console.Write("First Name: ");
-                                    newName = Console.ReadLine();
+                                    newName = Console.ReadLine().Trim();
+                                    newName = char.ToUpper(newName[0]) + newName.Substring(1).ToLower();
                                     if (newName != "")
                                     {
                                         students[i].FirstName = newName.Trim();
                                     }
                                     Console.Write("Last Name: ");
-                                    newName = Console.ReadLine();
+                                    newName = Console.ReadLine().Trim();
+                                    newName = char.ToUpper(newName[0]) + newName.Substring(1).ToLower();
                                     if (newName != "")
                                     {
                                         students[i].LastName = newName.Trim();
