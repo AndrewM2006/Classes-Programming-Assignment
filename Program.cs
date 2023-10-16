@@ -18,6 +18,8 @@ namespace Classes_Programming_Assignment
             students.Add(new Student("Andrew", "Monteith"));
             students.Add(new Student("George", "Washington"));
             students.Add(new Student("Luke", "Skywalker"));
+            students.Add(new Student("Raihan", "Carder"));
+            students.Add(new Student("Michelle", "Obama"));
             while (true)
             {
                 Console.WriteLine("Press 1 to Display Students");
